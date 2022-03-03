@@ -2,7 +2,11 @@ const $ = require("jquery")
 
 module.exports = class Dropdown {
     constructor(parentId, attributes, options = [], label = "") {
-        this.createHTML(parentId, attributes, label)
+        this.parentDivId = attributes.id + "div"
+        $("#" + parentId).append(
+            $(document.createElement('div')).attr({id: this.parentDivId})
+        )
+        this.createHTML(this.parentDivId, attributes, label)
         this.addAllOptions(attributes.id, options)
         this.element = $("#" + attributes.id)[0]
     }
@@ -23,6 +27,11 @@ module.exports = class Dropdown {
 
     getValue() {
         return this.element.value
+    }
+
+    addClass(name) {
+        let id = this.element.id
+        $("#" + id).addClass(name)
     }
 
     addOption(id, name, value, selected = false) {
