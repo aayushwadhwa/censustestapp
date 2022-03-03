@@ -8,7 +8,7 @@ const app = express();
 const request = require("request");
 const bodyParser = require("body-parser");
 
-const APIkey = "PASTE_API_KEY_HERE";
+const APIkey = "fc717239202c5a05297128832891e1cea40c2aea";
 const url = "http://api.census.gov/data/2013/acs/acs1/profile";
 
 app.use(express.static("public"));

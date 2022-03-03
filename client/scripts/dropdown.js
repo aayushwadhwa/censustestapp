@@ -4,7 +4,7 @@ module.exports = class Dropdown {
     constructor(parentId, attributes, options = [], label = "") {
         this.createHTML(parentId, attributes, label)
         this.addAllOptions(attributes.id, options)
-        return $("#" + attributes.id)[0]
+        this.element = $("#" + attributes.id)[0]
     }
 
     createHTML(parentId, attributes, label) {
@@ -21,9 +21,18 @@ module.exports = class Dropdown {
         }
     }
 
+    getValue() {
+        return this.element.value
+    }
+
     addOption(id, name, value, selected = false) {
         $("#" + id).append(
             $(document.createElement("option")).attr({'value': value, selected: selected}).text(name)
         )
+    }
+
+    updateOptions(options) {
+        this.element.innerHTML = '';
+        this.addAllOptions(this.element.id, options)
     }
 }
