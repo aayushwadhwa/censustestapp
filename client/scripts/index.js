@@ -5,6 +5,7 @@ const _ = require("lodash");
 /* Classes Import */
 const Dropdown = require('./dropdown');
 const Input = require('./input');
+const Button = require('./button');
 
 const main = "content";
 
@@ -22,7 +23,8 @@ const incomeAttributes = {id: "incomeInput", name: "Income", value: 0, type: "nu
 const incomeInput = new Input(main, incomeAttributes, "Enter your Income");
 
 // create Ok Button
-
+const buttonAttributes = {id: "okButton"};
+const okButton = new Button(main, buttonAttributes, "Ok");
 
 const getCounties = async (state, dropdown) => {
     countyDropdown.updateOptions([{name: "Loading...", value: "-1"}])
@@ -48,6 +50,10 @@ stateDropdown.element.onchange = (element) => {
 
 countyDropdown.element.onchange = (element) => {
     getIncome(stateDropdown.getValue(), element.srcElement.value)
+}
+
+okButton.element.onclick = (element) => {
+    console.log(element)
 }
 
 getCounties(stateDropdown.getValue(), countyDropdown);
