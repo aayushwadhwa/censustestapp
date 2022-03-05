@@ -1,0 +1,32 @@
+.text-center {
+    text-align: center;
+}
+.text-right {
+    text-align: right;
+}
+.parent-div {
+    padding: 7px 0px;
+    height: 25px;
+    width: 30%;
+    margin: 0 auto;
+}
+.button {
+    text-transform: uppercase;
+    padding: 0px 10px;
+    height: 100%;
+}
+.label {
+    width: 25%;
+    display: inline-block;
+}
+.dropdown {
+    display: inline-block;
+    width: 75%;
+    height: 100%;
+}
+.input {
+    display: inline-block;
+    width: calc(75% - 4px);
+    height: calc(100% - 4px);
+    padding: 0;
+}

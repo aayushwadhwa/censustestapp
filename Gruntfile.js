@@ -89,7 +89,8 @@ module.exports = function(grunt) {
             extensions: [".js", ".jsx"],
             debug: true,
             transform: [
-              ["babelify"]
+              ["babelify"],
+              ['browserify-css', { global: true }]
             ]
           }
         }
