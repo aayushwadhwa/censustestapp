@@ -25,9 +25,8 @@ const incomeAttributes = {id: "incomeInput", name: "Income", value: 0, type: "nu
 const incomeInput = new Input(main, incomeAttributes, "Income");
 
 // create Ok Button
-const buttonAttributes = {id: "okButton"};
+const buttonAttributes = {id: "okButton", class: "button"};
 const okButton = new Button(main, buttonAttributes, "Ok");
-okButton.addClass("button")
 
 const getCounties = async (state, dropdown) => {
     countyDropdown.updateOptions([{name: "Loading...", value: "-1"}])
@@ -37,11 +36,11 @@ const getCounties = async (state, dropdown) => {
     console.log(data)
     const options = _.map(data, function convert(option) { return {name: option[0], value: option[2]}})
     dropdown.updateOptions(options)
-    county = options[0].value
-    getIncome(state, county)
+    // countyValue = options[0].value
+    // getIncome(state, county)
 }
 
-const getIncome = async (state, county, dropdown=null) => {
+const getIncome = async (state, county) => {
     const response = await fetch('http://localhost:3000/incomes?state=' + state + '&county=' + county)
     let data = await response.json();
     console.log(data)
@@ -51,12 +50,14 @@ stateDropdown.element.onchange = (element) => {
     getCounties(element.srcElement.value, countyDropdown)
 }
 
-countyDropdown.element.onchange = (element) => {
-    getIncome(stateDropdown.getValue(), element.srcElement.value)
-}
+// countyDropdown.element.onchange = (element) => {
+    // getIncome(stateDropdown.getValue(), element.srcElement.value)
+// }
 
-okButton.element.onclick = (element) => {
-    console.log(element)
+okButton.element.onclick = () => {
+    if (incomeInput.getValue() > 0) {
+        getIncome(stateDropdown.getValue(), countyDropdown.getValue())
+    }
 }
 
 getCounties(stateDropdown.getValue(), countyDropdown);

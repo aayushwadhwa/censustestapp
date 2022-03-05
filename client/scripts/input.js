@@ -7,6 +7,7 @@ module.exports = class Input {
             $(document.createElement('div')).attr({id: this.parentDivId, class: "parent-div"})
         )
         this.createHTML(this.parentDivId, attributes, label)
+        this.element = $("#" + attributes.id)[0]
     }
 
     createHTML(parentId, attributes, label) {
@@ -15,5 +16,8 @@ module.exports = class Input {
         ).append(
             $(document.createElement("input")).attr(attributes)
         )
+    }
+    getValue() {
+        return this.element.value;
     }
 }
