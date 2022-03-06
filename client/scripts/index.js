@@ -8,6 +8,7 @@ const _ = require("lodash");
 const Dropdown = require('./dropdown');
 const Input = require('./input');
 const Button = require('./button');
+const Visualize = require('./visualize')
 
 const main = "content";
 
@@ -28,6 +29,10 @@ const incomeInput = new Input(main, incomeAttributes, "Income");
 const buttonAttributes = {id: "okButton", class: "button"};
 const okButton = new Button(main, buttonAttributes, "Ok");
 
+// creat chart
+const chartAttributes = {id: "myChart"};
+const chart = new Visualize(main, chartAttributes, {});
+
 const getCounties = async (state, dropdown) => {
     countyDropdown.updateOptions([{name: "Loading...", value: "-1"}])
     const response = await fetch('http://localhost:3000/counties?state=' + state)
@@ -43,7 +48,13 @@ const getCounties = async (state, dropdown) => {
 const getIncome = async (state, county) => {
     const response = await fetch('http://localhost:3000/incomes?state=' + state + '&county=' + county)
     let data = await response.json();
-    console.log(data)
+    let d = {labels: [], data: []}
+    data.incomeDataAll.forEach((v) => {
+        max = v.max ? " - " + v.max.toString() : "+";
+        d.labels.push(v.min.toString() + max)
+        d.data.push(v.households)
+    })
+    chart.createChart(d)
 }
 
 stateDropdown.element.onchange = (element) => {

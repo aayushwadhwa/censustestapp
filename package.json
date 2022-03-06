@@ -19,6 +19,7 @@
     "shell": "^0.3.2"
   },
   "dependencies": {
+    "chart.js": "^3.7.1",
     "grunt-cli": "^1.2.0",
     "grunt-contrib-compress": "^1.3.0",
     "jquery": "^3.5.0",
