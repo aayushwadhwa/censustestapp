@@ -15,10 +15,14 @@ module.exports = class Visualize {
         $("#" + parentId).append(
             $(document.createElement('canvas')).attr({ id: id, height: "400" })
         )
+        $("#" + parentId).append(
+            $(document.createElement('p')).attr({ id: "loading"}).html("Please wait...").hide()
+        )
         return $('#' + id)[0]
     }
     
     createChart(data) {
+        this.loading(false);
         if (this.chart == null) {
         this.chart = new Chart(this.element, {
             type: 'doughnut',
@@ -52,5 +56,15 @@ module.exports = class Visualize {
         this.chart.data.datasets[0].data = data.data;
         this.chart.update();
     }
+    }
+
+    loading(isLoading) {
+        if (isLoading) {
+            this.element.style.display = "none";
+            $("#loading")[0].style.display = "";
+        } else {
+            this.element.style.display = "";
+            $("#loading")[0].style.display = "none"
+        }
     }
 }

@@ -46,6 +46,7 @@ const getCounties = async (state, dropdown) => {
 }
 
 const getIncome = async (state, county) => {
+    chart.loading(true)
     const response = await fetch('http://localhost:3000/incomes?state=' + state + '&county=' + county)
     let data = await response.json();
     let d = {labels: [], data: []}
@@ -68,6 +69,8 @@ stateDropdown.element.onchange = (element) => {
 okButton.element.onclick = () => {
     if (incomeInput.getValue() > 0) {
         getIncome(stateDropdown.getValue(), countyDropdown.getValue())
+    } else {
+        alert("Income value must be greater than 0.")
     }
 }
 
